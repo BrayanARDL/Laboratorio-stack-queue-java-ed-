@@ -1,0 +1,16 @@
+\begin{tabular}{llllrr}
+\toprule
+\textbf{Lista} & \textbf{Implementación elegida} & \textbf{Arreglo circular} & \textbf{Big-O (L / A)} & \textbf{Lista (µs)} & \textbf{Arreglo (µs)} \\
+\midrule
+PushFront & SLL sin cola & ArrayStack.Push & $O(1)$ / $O(1)^{*}$ & 0{,}041 & 0{,}079 \\
+PopFront & SLL sin cola & ArrayStack.Pop & $O(1)$ / $O(1)$ & 0{,}043 & 0{,}045 \\
+TopFront & SLL sin cola & ArrayStack.Peek & $O(1)$ / $O(1)$ & 0{,}050 & 0{,}065 \\
+PushBack & SLL con cola & ArrayQueue.Enqueue & $O(1)$ / $O(1)^{*}$ & 3{,}087 & 0{,}047 \\
+PopFront & SLL sin cola & ArrayQueue.Dequeue & $O(1)$ / $O(1)$ & 0{,}043 & 0{,}224 \\
+TopFront & SLL sin cola & ArrayQueue.Front & $O(1)$ / $O(1)$ & 0{,}050 & 0{,}164 \\
+Erase & SLL sin cola & ArrayStack.Delete & $O(n)$ / $O(n)$ & 595\,694 & 459\,725 \\
+Erase & SLL sin cola & ArrayQueue.Delete & $O(n)$ / $O(n)$ & 595\,694 & 360\,588 \\
+Empty & SLL sin cola & ArrayStack.IsEmpty & $O(1)$ / $O(1)$ & 0{,}064 & 0{,}049 \\
+Size & SLL sin cola & ArrayStack.Size & $O(1)$ / $O(1)$ & 0{,}068 & 0{,}052 \\
+\bottomrule
+\end{tabular}
