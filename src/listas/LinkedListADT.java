@@ -34,10 +34,17 @@ public interface LinkedListADT<T, N> {
     /** Elimina la primera aparición de key. Retorna true si la encontró. */
     boolean erase(T key);
 
-    /** Inserta key inmediatamente antes del nodo indicado. */
+    /**
+     * Inserta key inmediatamente antes del nodo indicado.
+     * Precondición: el nodo pertenece a esta lista (normalmente se obtiene con find).
+     */
     void addBefore(N node, T key);
 
-    /** Inserta key inmediatamente después del nodo indicado. */
+    /**
+     * Inserta key inmediatamente después del nodo indicado.
+     * Precondición: el nodo pertenece a esta lista. No se verifica, porque comprobarlo
+     * exigiría recorrer la lista y la operación dejaría de ser O(1).
+     */
     void addAfter(N node, T key);
 
     /** true si la lista no tiene elementos. */

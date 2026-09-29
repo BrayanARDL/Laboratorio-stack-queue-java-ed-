@@ -31,6 +31,20 @@ informe/
   informe.tex  Fuente del informe; figuras/ y tablas/ se generan con graficar.py
 ```
 
+## Uso de librerías
+
+Las estructuras (`src/listas` y `src/pilacola`) **no importan ninguna librería**: no usan `java.util`
+(ni `ArrayList`, `LinkedList`, `ArrayDeque`, `Stack`, etc.). Se pueden compilar solas:
+`javac src/listas/*.java src/pilacola/*.java`.
+
+`java.util` aparece únicamente fuera de las estructuras, como permite el enunciado:
+
+| Archivo | Qué usa | Para qué |
+|---|---|---|
+| `src/benchmark/Benchmark.java` | `Random`, `Locale`, `function.Supplier`, `java.io`, `java.nio` | Generar las entradas aleatorias, crear cada estructura y escribir el CSV de tiempos (medición) |
+| `src/pruebas/Pruebas.java` | `ArrayList`, `List`, `Random`, `Objects`, `function.Supplier` | Pruebas de correctitud: `ArrayList` es solo la referencia contra la que se comparan los resultados; las estructuras nunca la usan |
+| `analisis/graficar.py` | `pandas`, `matplotlib` | Graficación, separada de la medición |
+
 ## Complejidad teórica (peor caso)
 
 | Método     | Simple sin cola | Simple con cola | Doble sin cola | Doble con cola | Pila / Cola (arreglo circular) |
@@ -49,12 +63,12 @@ informe/
 
 ## Cómo ejecutar
 
-Requisitos: Java 17 o superior y Python 3 con `pandas` y `matplotlib` (`pip install pandas matplotlib`).
+Requisitos: Java 8 o superior (probado con 8, 11, 17 y 21) y Python 3 con `pandas` y `matplotlib` (`pip install pandas matplotlib`).
 
 ```bash
 # Linux / macOS
-./ejecutar.sh        # todo: compilar, probar, medir (hasta 10^8) y graficar
-./ejecutar.sh 6      # igual, pero solo hasta 10^6 (unos segundos, poca memoria)
+bash ejecutar.sh     # todo: compilar, probar, medir (hasta 10^8) y graficar
+bash ejecutar.sh 6   # igual, pero solo hasta 10^6 (unos segundos, poca memoria)
 ```
 
 ```bat

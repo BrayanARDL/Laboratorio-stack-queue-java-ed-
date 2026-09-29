@@ -90,37 +90,57 @@ public class Pruebas {
             int v = RND.nextInt(50);                 // rango pequeño => muchos repetidos
             int tipo = RND.nextInt(ref.size() > 300 ? 12 : 9); // si crece mucho, favorecer borrados
             switch (tipo) {
-                case 0 -> { lista.pushFront(v); ref.add(0, v); }
-                case 1 -> { lista.pushBack(v); ref.add(v); }
-                case 2 -> { if (!ref.isEmpty()) verificar(nombre, "popFront", ref.remove(0), lista.popFront()); }
-                case 3, 9 -> { if (!ref.isEmpty()) verificar(nombre, "popBack", ref.remove(ref.size() - 1), lista.popBack()); }
-                case 4 -> {
+                case 0:
+                    lista.pushFront(v);
+                    ref.add(0, v);
+                    break;
+                case 1:
+                    lista.pushBack(v);
+                    ref.add(v);
+                    break;
+                case 2:
+                    if (!ref.isEmpty()) verificar(nombre, "popFront", ref.remove(0), lista.popFront());
+                    break;
+                case 3:
+                case 9:
+                    if (!ref.isEmpty()) verificar(nombre, "popBack", ref.remove(ref.size() - 1), lista.popBack());
+                    break;
+                case 4:
                     if (!ref.isEmpty()) {
                         verificar(nombre, "topFront", ref.get(0), lista.topFront());
                         verificar(nombre, "topBack", ref.get(ref.size() - 1), lista.topBack());
                     }
-                }
-                case 5 -> {
+                    break;
+                case 5: {
                     N nodo = lista.find(v);
                     verificar(nombre, "find existe", ref.contains(v), nodo != null);
+                    break;
                 }
-                case 6, 10, 11 -> verificar(nombre, "erase", ref.remove(Integer.valueOf(v)), lista.erase(v));
-                case 7 -> {
+                case 6:
+                case 10:
+                case 11:
+                    verificar(nombre, "erase", ref.remove(Integer.valueOf(v)), lista.erase(v));
+                    break;
+                case 7: {
                     int k = RND.nextInt(50);
                     N nodo = lista.find(k);
                     if (nodo != null) {
                         lista.addAfter(nodo, v);
                         ref.add(ref.indexOf(k) + 1, v);
                     }
+                    break;
                 }
-                case 8 -> {
+                case 8: {
                     int k = RND.nextInt(50);
                     N nodo = lista.find(k);
                     if (nodo != null) {
                         lista.addBefore(nodo, v);
                         ref.add(ref.indexOf(k), v);
                     }
+                    break;
                 }
+                default:
+                    break;
             }
             verificar(nombre, "size", ref.size(), lista.size());
             verificar(nombre, "isEmpty", ref.isEmpty(), lista.isEmpty());
@@ -149,13 +169,22 @@ public class Pruebas {
             int v = RND.nextInt(50);
             int tipo = RND.nextInt(ref.size() > 300 ? 6 : 4);
             switch (tipo) {
-                case 0 -> { pila.push(v); ref.add(v); }
-                case 1, 4 -> { if (!ref.isEmpty()) verificar(nombre, "pop", ref.remove(ref.size() - 1), pila.pop()); }
-                case 2 -> { if (!ref.isEmpty()) verificar(nombre, "peek", ref.get(ref.size() - 1), pila.peek()); }
-                case 3, 5 -> {
+                case 0:
+                    pila.push(v);
+                    ref.add(v);
+                    break;
+                case 1:
+                case 4:
+                    if (!ref.isEmpty()) verificar(nombre, "pop", ref.remove(ref.size() - 1), pila.pop());
+                    break;
+                case 2:
+                    if (!ref.isEmpty()) verificar(nombre, "peek", ref.get(ref.size() - 1), pila.peek());
+                    break;
+                default: {                              // 3 y 5: delete
                     int i = ref.lastIndexOf(v);         // "primer valor que encuentra" desde la cima
                     if (i >= 0) ref.remove(i);
                     verificar(nombre, "delete", i >= 0, pila.delete(v));
+                    break;
                 }
             }
             verificar(nombre, "size", ref.size(), pila.size());
@@ -178,13 +207,22 @@ public class Pruebas {
             int v = RND.nextInt(50);
             int tipo = RND.nextInt(ref.size() > 300 ? 6 : 4);
             switch (tipo) {
-                case 0 -> { cola.enqueue(v); ref.add(v); }
-                case 1, 4 -> { if (!ref.isEmpty()) verificar(nombre, "dequeue", ref.remove(0), cola.dequeue()); }
-                case 2 -> { if (!ref.isEmpty()) verificar(nombre, "front", ref.get(0), cola.front()); }
-                case 3, 5 -> {
+                case 0:
+                    cola.enqueue(v);
+                    ref.add(v);
+                    break;
+                case 1:
+                case 4:
+                    if (!ref.isEmpty()) verificar(nombre, "dequeue", ref.remove(0), cola.dequeue());
+                    break;
+                case 2:
+                    if (!ref.isEmpty()) verificar(nombre, "front", ref.get(0), cola.front());
+                    break;
+                default: {                              // 3 y 5: delete
                     int i = ref.indexOf(v);
                     if (i >= 0) ref.remove(i);
                     verificar(nombre, "delete", i >= 0, cola.delete(v));
+                    break;
                 }
             }
             verificar(nombre, "size", ref.size(), cola.size());

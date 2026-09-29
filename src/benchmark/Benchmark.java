@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -80,7 +81,7 @@ public class Benchmark {
     public static void main(String[] args) throws IOException {
         Locale.setDefault(Locale.US);
         int maxExp = args.length > 0 ? Integer.parseInt(args[0]) : 8;
-        Path salida = Path.of(args.length > 1 ? args[1] : "resultados/tiempos.csv");
+        Path salida = Paths.get(args.length > 1 ? args[1] : "resultados/tiempos.csv");
         if (salida.getParent() != null) Files.createDirectories(salida.getParent());
 
         long memoria = Runtime.getRuntime().maxMemory();

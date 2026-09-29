@@ -15,7 +15,12 @@ echo == Pruebas de correctitud ==
 java -cp out pruebas.Pruebas || exit /b 1
 
 echo == Benchmark (hasta 10^%MAXEXP%) ==
-java -Xms5g -Xmx5g -XX:+UseParallelGC -XX:+AlwaysPreTouch -cp out benchmark.Benchmark %MAXEXP% resultados\tiempos.csv || exit /b 1
+java -Xms5g -Xmx5g -XX:+UseParallelGC -XX:+AlwaysPreTouch -cp out benchmark.Benchmark %MAXEXP% resultados\tiempos.csv
+if errorlevel 1 (
+    echo No se pudieron usar 5 GB de memoria. Se repite con la memoria por defecto;
+    echo el benchmark ajusta solo el tamano maximo a la memoria disponible.
+    java -XX:+UseParallelGC -cp out benchmark.Benchmark %MAXEXP% resultados\tiempos.csv || exit /b 1
+)
 
 echo == Graficas y tablas ==
 python analisis\graficar.py resultados\tiempos.csv
