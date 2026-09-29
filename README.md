@@ -63,7 +63,8 @@ ejecutar.bat
 ejecutar.bat 6
 ```
 
-Paso a paso:
+Paso a paso (en Windows, compilar con
+`javac -encoding UTF-8 -d out src\listas\*.java src\pilacola\*.java src\benchmark\*.java src\pruebas\*.java`):
 
 ```bash
 javac -encoding UTF-8 -d out $(find src -name "*.java")

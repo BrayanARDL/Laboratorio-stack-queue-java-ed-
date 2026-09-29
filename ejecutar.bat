@@ -8,9 +8,8 @@ if "%MAXEXP%"=="" set MAXEXP=8
 
 echo == Compilando ==
 if exist out rmdir /s /q out
-dir /s /b src\*.java > fuentes.txt
-javac -encoding UTF-8 -d out @fuentes.txt || exit /b 1
-del fuentes.txt
+REM Rutas relativas: funciona aunque la carpeta del proyecto tenga espacios en el nombre
+javac -encoding UTF-8 -d out src\listas\*.java src\pilacola\*.java src\benchmark\*.java src\pruebas\*.java || exit /b 1
 
 echo == Pruebas de correctitud ==
 java -cp out pruebas.Pruebas || exit /b 1
