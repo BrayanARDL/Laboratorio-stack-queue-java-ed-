@@ -76,6 +76,11 @@ python3 analisis/graficar.py resultados/tiempos.csv
 Para 10⁸ se necesitan unos 6 GB de RAM libres (la lista de 10⁸ nodos ocupa ~2,4 GB).
 Si el equipo tiene menos memoria, use `maxExp = 7`.
 
+**Desde un IDE (IntelliJ, VS Code, Eclipse):** ejecute el `main` de `pruebas.Pruebas` para verificar las
+estructuras y el de `benchmark.Benchmark` para medir. Si la JVM no tiene memoria suficiente para 10⁸
+(por ejemplo, sin la opción `-Xmx5g`), el benchmark lo avisa y mide automáticamente hasta el mayor tamaño
+que quepa, en lugar de fallar.
+
 ## Metodología de medición (resumen)
 
 - **Nanosegundos** con `System.nanoTime()`: las operaciones O(1) duran decenas de nanosegundos, y con

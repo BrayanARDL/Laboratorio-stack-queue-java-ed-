@@ -1,8 +1,5 @@
 package listas;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
 /**
  * Lista doblemente enlazada CON cola (guarda head y tail).
  *
@@ -84,7 +81,7 @@ public class DoublyLinkedListTail<T> implements LinkedListADT<T, DNode<T>> {
     public DNode<T> find(T key) {
         DNode<T> cur = head;
         while (cur != null) {
-            if (Objects.equals(cur.key, key)) {
+            if (iguales(cur.key, key)) {
                 return cur;
             }
             cur = cur.next;
@@ -167,9 +164,17 @@ public class DoublyLinkedListTail<T> implements LinkedListADT<T, DNode<T>> {
         size--;
     }
 
+    /**
+     * Compara dos claves admitiendo null: son iguales si son la misma
+     * referencia o si a.equals(b).
+     */
+    private static boolean iguales(Object a, Object b) {
+        return a == b || (a != null && a.equals(b));
+    }
+
     private void checkNotEmpty() {
         if (head == null) {
-            throw new NoSuchElementException("La lista está vacía");
+            throw new IllegalStateException("La lista está vacía");
         }
     }
 

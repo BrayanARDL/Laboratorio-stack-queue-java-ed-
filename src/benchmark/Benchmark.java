@@ -50,6 +50,12 @@ public class Benchmark {
     private static final Integer OBJETIVO = -2;    // elemento que se borra en erase/delete
     private static final Integer ANCLA = -3;       // nodo de referencia para addBefore/addAfter
 
+    /**
+     * Memoria aproximada que exige el benchmark por elemento en el tamaño máximo
+     * (nodo de 24 bytes + margen para el recolector y los arreglos de la pila/cola).
+     */
+    private static final double BYTES_POR_ELEMENTO = 45;
+
     /** Evita que el JIT elimine operaciones cuyo resultado no se usa. */
     public static volatile Object sink;
 
@@ -77,7 +83,21 @@ public class Benchmark {
         Path salida = Path.of(args.length > 1 ? args[1] : "resultados/tiempos.csv");
         if (salida.getParent() != null) Files.createDirectories(salida.getParent());
 
-        log("Memoria máxima de la JVM: %.1f GB", Runtime.getRuntime().maxMemory() / 1e9);
+        long memoria = Runtime.getRuntime().maxMemory();
+        log("Memoria máxima de la JVM: %.1f GB", memoria / 1e9);
+
+        // Si la JVM no tiene memoria para el tamaño pedido (p. ej. al ejecutar desde un IDE
+        // sin -Xmx), se reduce el tamaño máximo en lugar de fallar con OutOfMemoryError.
+        int pedido = maxExp;
+        while (maxExp > 1 && BYTES_POR_ELEMENTO * Math.pow(10, maxExp) > memoria) {
+            maxExp--;
+        }
+        if (maxExp < pedido) {
+            log("AVISO: 10^%d necesita unos %.1f GB de memoria y la JVM tiene %.1f GB.",
+                    pedido, BYTES_POR_ELEMENTO * Math.pow(10, pedido) / 1e9, memoria / 1e9);
+            log("       Se medirá hasta 10^%d. Para llegar a 10^%d ejecute con -Xms5g -Xmx5g (ver README).",
+                    maxExp, pedido);
+        }
         log("Calentando la JVM (JIT)...");
         calentamiento();
 

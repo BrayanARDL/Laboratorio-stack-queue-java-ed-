@@ -1,8 +1,5 @@
 package listas;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
 /**
  * Lista simplemente enlazada SIN cola (solo guarda head).
  *
@@ -105,7 +102,7 @@ public class SinglyLinkedList<T> implements LinkedListADT<T, SNode<T>> {
     public SNode<T> find(T key) {
         SNode<T> cur = head;
         while (cur != null) {
-            if (Objects.equals(cur.key, key)) {
+            if (iguales(cur.key, key)) {
                 return cur;
             }
             cur = cur.next;
@@ -119,13 +116,13 @@ public class SinglyLinkedList<T> implements LinkedListADT<T, SNode<T>> {
         if (head == null) {
             return false;
         }
-        if (Objects.equals(head.key, key)) {   // caso especial: es el primero
+        if (iguales(head.key, key)) {   // caso especial: es el primero
             head = head.next;
             size--;
             return true;
         }
         SNode<T> prev = head;                  // buscamos el nodo ANTERIOR al que se borra
-        while (prev.next != null && !Objects.equals(prev.next.key, key)) {
+        while (prev.next != null && !iguales(prev.next.key, key)) {
             prev = prev.next;
         }
         if (prev.next == null) {
@@ -191,9 +188,17 @@ public class SinglyLinkedList<T> implements LinkedListADT<T, SNode<T>> {
         return size;
     }
 
+    /**
+     * Compara dos claves admitiendo null: son iguales si son la misma
+     * referencia o si a.equals(b).
+     */
+    private static boolean iguales(Object a, Object b) {
+        return a == b || (a != null && a.equals(b));
+    }
+
     private void checkNotEmpty() {
         if (head == null) {
-            throw new NoSuchElementException("La lista está vacía");
+            throw new IllegalStateException("La lista está vacía");
         }
     }
 

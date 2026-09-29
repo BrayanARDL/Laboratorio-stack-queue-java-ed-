@@ -1,8 +1,5 @@
 package pilacola;
 
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
 /**
  * Arreglo circular dinámico: la base sobre la que se construyen ArrayStack y ArrayQueue.
  *
@@ -118,7 +115,7 @@ public class CircularDynamicArray<T> {
     /** O(n): índice lógico de la primera aparición de x desde el inicio, o -1. */
     public int indexOfFromFirst(T x) {
         for (int i = 0; i < size; i++) {
-            if (Objects.equals(data[physical(i)], x)) {
+            if (iguales(data[physical(i)], x)) {
                 return i;
             }
         }
@@ -128,7 +125,7 @@ public class CircularDynamicArray<T> {
     /** O(n): índice lógico de la primera aparición de x desde el final, o -1. */
     public int indexOfFromLast(T x) {
         for (int i = size - 1; i >= 0; i--) {
-            if (Objects.equals(data[physical(i)], x)) {
+            if (iguales(data[physical(i)], x)) {
                 return i;
             }
         }
@@ -203,9 +200,17 @@ public class CircularDynamicArray<T> {
         System.arraycopy(src, 0, dst, firstPart, count - firstPart); // lo que dio la vuelta
     }
 
+    /**
+     * Compara dos claves admitiendo null: son iguales si son la misma
+     * referencia o si a.equals(b).
+     */
+    private static boolean iguales(Object a, Object b) {
+        return a == b || (a != null && a.equals(b));
+    }
+
     private void checkNotEmpty() {
         if (size == 0) {
-            throw new NoSuchElementException("La estructura está vacía");
+            throw new IllegalStateException("La estructura está vacía");
         }
     }
 

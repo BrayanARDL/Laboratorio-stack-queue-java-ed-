@@ -5,7 +5,6 @@ import pilacola.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -232,7 +231,7 @@ public class Pruebas {
             accion.run();
             fallos++;
             System.out.println("FALLO: se esperaba excepción en " + que);
-        } catch (NoSuchElementException e) {
+        } catch (IllegalStateException e) {
             // correcto
         }
     }
