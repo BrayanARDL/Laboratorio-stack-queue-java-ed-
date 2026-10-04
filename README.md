@@ -4,6 +4,15 @@
 Profesor: David Herrera · Monitora: Ángela Camila Siabato Londoño  
 Estudiante: Brallan Esteban Ardila Osorio
 
+## Uso de inteligencia artificial
+
+> **Nota:** Agregué esta sección el 4 de octubre de 2026. Debí incluirla desde el principio, pero se me había pasado.
+
+En este repositorio utilicé herramientas de inteligencia artificial de la siguiente manera:
+
+- **Documento en LaTeX:** usé IA en la mayor parte del proceso para organizar la estructura y el formato del documento.
+- **`graficar.py`:** la mayor parte de este script la escribí con ayuda de IA, ya que mi conocimiento de Python es limitado.
+
 Implementación desde cero (sin `java.util` en las estructuras) de:
 
 - **Listas enlazadas** en cuatro variantes: simplemente enlazada sin cola, simplemente enlazada con cola,
