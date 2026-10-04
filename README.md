@@ -10,8 +10,8 @@ Estudiante: Brallan Esteban Ardila Osorio
 
 En este repositorio utilicé herramientas de inteligencia artificial de la siguiente manera:
 
-- **Documento en LaTeX:** usé IA en la mayor parte del proceso para organizar la estructura y el formato del documento.
-- **`graficar.py`:** la mayor parte de este script la escribí con ayuda de IA, ya que mi conocimiento de Python es limitado.
+- **Documento en LaTeX:** usé IA(Gemini) en la mayor parte del proceso para organizar la estructura y el formato del documento.
+- **`graficar.py`:** la mayor parte de este script la escribí con ayuda de IA(Gemini), ya que mi conocimiento de Python es limitado.
 
 Implementación desde cero (sin `java.util` en las estructuras) de:
 
